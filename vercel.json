@@ -1,7 +1,10 @@
 {
-"rewrites": [
+  "buildCommand": "tsc",
+  "outputDirectory": ".",
+  "framework": null,
+  "rewrites": [
     { "source": "/tecnico", "destination": "/tecnicos.html" },
     { "source": "/usuario", "destination": "/usuarios.html" },
     { "source": "/", "destination": "/usuarios.html" }
-]
+  ]
 }
