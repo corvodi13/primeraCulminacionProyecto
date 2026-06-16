@@ -39,6 +39,7 @@ export default class Cl_mLaboratorio {
         return this._equipos.filter(equipo => equipo.estado === 'Activo');
     }
 
+    
     //////////////////////////////////
 
     public obtenerLaboratorioConMenosEquipos(listaAProcesar?: Cl_mEquipos[]): { laboratorio: string; cantidad: number } {
