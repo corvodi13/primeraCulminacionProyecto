@@ -14,5 +14,13 @@ export default class Cl_mLaboratorio {
         laboratorio: string;
         cantidad: number;
     };
+    obtenerPorcentajeActivosPorLaboratorio(idLaboratorio: string, listaAProcesar?: Cl_mEquipos[]): {
+        laboratorio: string;
+        porcentaje: number;
+    };
+    calcularPorcentajeEstadoPorLaboratorio(idlaboratorio: string, estadoSeleccionado: string, listaAProcesar?: Cl_mEquipos[]): {
+        estado: string;
+        porcentaje: number;
+    };
 }
 //# sourceMappingURL=Cl_mLaboratorio.d.ts.map

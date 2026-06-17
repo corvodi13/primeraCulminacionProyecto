@@ -18,6 +18,11 @@ export default class Cl_vEquipoVista {
     //acá lo nuevo
     private lblLabMenos: HTMLElement;
     private lblCantMenos: HTMLElement;
+    // nuevo 16/06
+    private lblPorcActivos: HTMLElement;
+    private lblNombPorc: HTMLElement;
+    private lblPorcEstado: HTMLElement;
+    private lblNombEstado: HTMLElement;
 
     constructor() {
         this.inIdEquipo = <HTMLInputElement>document.getElementById("inIdEquipo");
@@ -37,6 +42,11 @@ export default class Cl_vEquipoVista {
         //lo nuevo
         this.lblLabMenos = <HTMLElement>document.getElementById("lbl-lab-menos");
         this.lblCantMenos = <HTMLElement>document.getElementById("lbl-cant-menos");
+        //nuevo 16/06
+        this.lblPorcActivos = <HTMLElement>document.getElementById("lblPorcActivos");
+        this.lblNombPorc = <HTMLElement>document.getElementById("lblNombPorc");
+        this.lblPorcEstado = <HTMLElement>document.getElementById("lblPorcEstado");
+        this.lblNombEstado = <HTMLElement>document.getElementById("lblNombEstado");
 
         this.btToggleFormulario.onclick = () => this.conmutarFormulario();
         this.btCancelarRegistro.onclick = () => this.conmutarFormulario();
@@ -127,6 +137,19 @@ export default class Cl_vEquipoVista {
         if (this.lblLabMenos && this.lblCantMenos) {
             this.lblLabMenos.textContent = laboratorio;
             this.lblCantMenos.textContent = `${cantidad} máquinas`;
+        }
+    }
+    ////////////// 16/06
+    public actualizarPanelPorcentajeActivos(laboratorio: string, porcentaje: number): void {
+        if (this.lblNombPorc && this.lblPorcActivos) {
+            this.lblNombPorc.textContent = laboratorio === "todos" ? "General" : `Laboratorio ${laboratorio}`;
+            this.lblPorcActivos.textContent = `${porcentaje}% activos`;
+        }
+    }
+    public actualizarPanelPorcentajeEstado(estado: string, porcentaje: number): void {
+        if (this.lblNombEstado && this.lblPorcEstado) {
+            this.lblNombEstado.textContent = estado === "todos" ? "General" : `Estado: ${estado}`;
+            this.lblPorcEstado.textContent = `${porcentaje}%`;
         }
     }
 

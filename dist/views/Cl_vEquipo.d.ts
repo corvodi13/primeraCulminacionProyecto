@@ -16,6 +16,10 @@ export default class Cl_vEquipoVista {
     private lblPorcentajeMantenimiento;
     private lblLabMenos;
     private lblCantMenos;
+    private lblPorcActivos;
+    private lblNombPorc;
+    private lblPorcEstado;
+    private lblNombEstado;
     constructor();
     private conmutarFormulario;
     get idEquipo(): string;
@@ -35,5 +39,7 @@ export default class Cl_vEquipoVista {
     onResolver(callback: () => void): void;
     actualizarEstadisticas(total: number, inactivos: number, porcentaje: number): void;
     actualizarPanelMenosMaquinas(laboratorio: string, cantidad: number): void;
+    actualizarPanelPorcentajeActivos(laboratorio: string, porcentaje: number): void;
+    actualizarPanelPorcentajeEstado(estado: string, porcentaje: number): void;
 }
 //# sourceMappingURL=Cl_vEquipo.d.ts.map

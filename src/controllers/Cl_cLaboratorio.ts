@@ -54,7 +54,13 @@ export default class Cl_cLaboratorio {
         const estadisticaLab = this.modelo.obtenerLaboratorioConMenosEquipos(this.modelo.equipos);
         this.vista.actualizarPanelMenosMaquinas(estadisticaLab.laboratorio, estadisticaLab.cantidad);
         // señor dame paciencia
-       
+        //////////////// 16/06
+        const porcentajeActivos = this.modelo.obtenerPorcentajeActivosPorLaboratorio(filtros.ubicacion, this.modelo.equipos);
+        this.vista.actualizarPanelPorcentajeActivos(porcentajeActivos.laboratorio, porcentajeActivos.porcentaje);
+
+        const porcentajeEstado = this.modelo.calcularPorcentajeEstadoPorLaboratorio(filtros.ubicacion, filtros.estado, this.modelo.equipos);
+        this.vista.actualizarPanelPorcentajeEstado(porcentajeEstado.estado, porcentajeEstado.porcentaje);
+
         listaFiltrada.forEach(equipo => {
             const datosLimpios = equipo.toJSON();
             const filaVisual = this.vista.extraerDatos(datosLimpios);
@@ -69,4 +75,5 @@ export default class Cl_cLaboratorio {
         this.modelo.equipos = equiposActualizados;
         this.mostrarEquiposEnPantalla();
     }
+
 }

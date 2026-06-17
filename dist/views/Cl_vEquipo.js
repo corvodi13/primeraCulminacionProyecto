@@ -16,6 +16,11 @@ export default class Cl_vEquipoVista {
     //acá lo nuevo
     lblLabMenos;
     lblCantMenos;
+    // nuevo 16/06
+    lblPorcActivos;
+    lblNombPorc;
+    lblPorcEstado;
+    lblNombEstado;
     constructor() {
         this.inIdEquipo = document.getElementById("inIdEquipo");
         this.btMantenimiento = document.getElementById("btMantenimiento");
@@ -34,6 +39,11 @@ export default class Cl_vEquipoVista {
         //lo nuevo
         this.lblLabMenos = document.getElementById("lbl-lab-menos");
         this.lblCantMenos = document.getElementById("lbl-cant-menos");
+        //nuevo 16/06
+        this.lblPorcActivos = document.getElementById("lblPorcActivos");
+        this.lblNombPorc = document.getElementById("lblNombPorc");
+        this.lblPorcEstado = document.getElementById("lblPorcEstado");
+        this.lblNombEstado = document.getElementById("lblNombEstado");
         this.btToggleFormulario.onclick = () => this.conmutarFormulario();
         this.btCancelarRegistro.onclick = () => this.conmutarFormulario();
     }
@@ -113,6 +123,19 @@ export default class Cl_vEquipoVista {
         if (this.lblLabMenos && this.lblCantMenos) {
             this.lblLabMenos.textContent = laboratorio;
             this.lblCantMenos.textContent = `${cantidad} máquinas`;
+        }
+    }
+    ////////////// 16/06
+    actualizarPanelPorcentajeActivos(laboratorio, porcentaje) {
+        if (this.lblNombPorc && this.lblPorcActivos) {
+            this.lblNombPorc.textContent = laboratorio === "todos" ? "General" : `Laboratorio ${laboratorio}`;
+            this.lblPorcActivos.textContent = `${porcentaje}% activos`;
+        }
+    }
+    actualizarPanelPorcentajeEstado(estado, porcentaje) {
+        if (this.lblNombEstado && this.lblPorcEstado) {
+            this.lblNombEstado.textContent = estado === "todos" ? "General" : `Estado: ${estado}`;
+            this.lblPorcEstado.textContent = `${porcentaje}%`;
         }
     }
 }

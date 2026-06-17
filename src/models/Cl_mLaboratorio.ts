@@ -73,5 +73,41 @@ export default class Cl_mLaboratorio {
         laboratorio: labMenosMaquinas === "Ninguno" ? "--" : labMenosMaquinas,
         cantidad: minMaquinas === Infinity ? 0 : minMaquinas
     };
-}
-}
+  }
+  //////////////////////////////////////////////////////
+
+  public obtenerPorcentajeActivosPorLaboratorio(idLaboratorio: string, listaAProcesar?: Cl_mEquipos[]): { laboratorio: string, porcentaje: number } {
+    const equiposAAnalizar = listaAProcesar ? listaAProcesar : this._equipos;
+
+    // Filtramos para quedarnos únicamente con los equipos del laboratorio seleccionado
+    const equiposDelLab = equiposAAnalizar.filter(equipo => {
+        const lab = equipo.ubicacion ? equipo.ubicacion.toString().trim() : "";
+        return lab === idLaboratorio.toString().trim();
+    });
+
+    const totalEquiposLab = equiposDelLab.length;
+
+    
+    if (totalEquiposLab === 0) return { laboratorio: idLaboratorio.trim() === "" ? "--" : idLaboratorio.trim(), porcentaje: 0 };
+    const equiposActivos = equiposDelLab.filter(equipo => equipo.estado === 'Activo').length;
+
+     let porcentajeActivos = Math.round((equiposActivos / totalEquiposLab) * 100);
+     let nombreLab = idLaboratorio.trim() === "" ? "--" : idLaboratorio.trim();
+
+   
+    return { laboratorio: nombreLab, porcentaje: porcentajeActivos }; 
+    }
+
+    public calcularPorcentajeEstadoPorLaboratorio(idlaboratorio: string, estadoSeleccionado: string, listaAProcesar?: Cl_mEquipos[]): {estado: string, porcentaje: number } {
+        const equiposAAnalizar = listaAProcesar ? listaAProcesar : this._equipos;
+        const equiposDelLab = equiposAAnalizar.filter(equipo => {
+            const lab = equipo.ubicacion ? equipo.ubicacion.toString().trim() : "";
+            return lab === idlaboratorio.toString().trim();
+        });
+        const totalEquiposLab = equiposDelLab.length;
+        if (totalEquiposLab === 0) return { estado: estadoSeleccionado.trim() === "" ? "--" : estadoSeleccionado.trim(), porcentaje: 0 };
+
+        const equiposConEstado = equiposDelLab.filter(equipo => equipo.estado === estadoSeleccionado).length;
+        const porcentaje = Math.round((equiposConEstado / totalEquiposLab) * 100);
+        return { estado: estadoSeleccionado, porcentaje };
+    }}

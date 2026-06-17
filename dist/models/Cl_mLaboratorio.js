@@ -59,5 +59,34 @@ export default class Cl_mLaboratorio {
             cantidad: minMaquinas === Infinity ? 0 : minMaquinas
         };
     }
+    //////////////////////////////////////////////////////
+    obtenerPorcentajeActivosPorLaboratorio(idLaboratorio, listaAProcesar) {
+        const equiposAAnalizar = listaAProcesar ? listaAProcesar : this._equipos;
+        // Filtramos para quedarnos únicamente con los equipos del laboratorio seleccionado
+        const equiposDelLab = equiposAAnalizar.filter(equipo => {
+            const lab = equipo.ubicacion ? equipo.ubicacion.toString().trim() : "";
+            return lab === idLaboratorio.toString().trim();
+        });
+        const totalEquiposLab = equiposDelLab.length;
+        if (totalEquiposLab === 0)
+            return { laboratorio: idLaboratorio.trim() === "" ? "--" : idLaboratorio.trim(), porcentaje: 0 };
+        const equiposActivos = equiposDelLab.filter(equipo => equipo.estado === 'Activo').length;
+        let porcentajeActivos = Math.round((equiposActivos / totalEquiposLab) * 100);
+        let nombreLab = idLaboratorio.trim() === "" ? "--" : idLaboratorio.trim();
+        return { laboratorio: nombreLab, porcentaje: porcentajeActivos };
+    }
+    calcularPorcentajeEstadoPorLaboratorio(idlaboratorio, estadoSeleccionado, listaAProcesar) {
+        const equiposAAnalizar = listaAProcesar ? listaAProcesar : this._equipos;
+        const equiposDelLab = equiposAAnalizar.filter(equipo => {
+            const lab = equipo.ubicacion ? equipo.ubicacion.toString().trim() : "";
+            return lab === idlaboratorio.toString().trim();
+        });
+        const totalEquiposLab = equiposDelLab.length;
+        if (totalEquiposLab === 0)
+            return { estado: estadoSeleccionado.trim() === "" ? "--" : estadoSeleccionado.trim(), porcentaje: 0 };
+        const equiposConEstado = equiposDelLab.filter(equipo => equipo.estado === estadoSeleccionado).length;
+        const porcentaje = Math.round((equiposConEstado / totalEquiposLab) * 100);
+        return { estado: estadoSeleccionado, porcentaje };
+    }
 }
 //# sourceMappingURL=Cl_mLaboratorio.js.map
