@@ -23,6 +23,8 @@ export default class Cl_vEquipoVista {
     private lblNombPorc: HTMLElement;
     private lblPorcEstado: HTMLElement;
     private lblNombEstado: HTMLElement;
+    //nuevo 23/06
+    private inFechaRegistro: HTMLInputElement;
 
     constructor() {
         this.inIdEquipo = <HTMLInputElement>document.getElementById("inIdEquipo");
@@ -47,6 +49,8 @@ export default class Cl_vEquipoVista {
         this.lblNombPorc = <HTMLElement>document.getElementById("lblNombPorc");
         this.lblPorcEstado = <HTMLElement>document.getElementById("lblPorcEstado");
         this.lblNombEstado = <HTMLElement>document.getElementById("lblNombEstado");
+        //lo nuevo 23/06
+        this.inFechaRegistro = <HTMLInputElement>document.getElementById("inFechaRegistro");
 
         this.btToggleFormulario.onclick = () => this.conmutarFormulario();
         this.btCancelarRegistro.onclick = () => this.conmutarFormulario();
@@ -76,6 +80,11 @@ export default class Cl_vEquipoVista {
         this.filtroEstado.onchange = () => callback();
 }
 
+get fechaRegistro(): Date {
+    const valor = this.inFechaRegistro.value; // string "2024-06-23"
+    return valor ? new Date(valor) : new Date(); // si no hay valor, fecha actual
+}
+
     get datosNuevoEquipo(): any {
         return {
             marca: (<HTMLInputElement>document.getElementById("addMarca")).value,
@@ -85,7 +94,8 @@ export default class Cl_vEquipoVista {
             meson: (<HTMLInputElement>document.getElementById("addMeson")).value,
             puesto: (<HTMLInputElement>document.getElementById("addPuesto")).value,
             observacion: (<HTMLInputElement>document.getElementById("addObservacion")).value,
-            estado: "activo"
+            estado: "activo",
+            fechaRegistro: this.fechaRegistro 
         };
     }
     onAgregarEquipo(callback: (datos: any) => void): void {

@@ -20,7 +20,19 @@ export default class Cl_mLaboratorio {
     public obtenerEquiposEnMantenimiento(): Cl_mEquipos[] {
         return this._equipos.filter(equipo => equipo.Mantenimiento());
     }
+public obtenerEquiposMasDeUnaSemana(listaAProcesar?: Cl_mEquipos[]): Cl_mEquipos[] {
+       
+        const equiposAAnalizar = listaAProcesar ? listaAProcesar : this._equipos;
+        
+        const fechaLimite = new Date();
+       
+        fechaLimite.setDate(fechaLimite.getDate() - 7);
 
+        return equiposAAnalizar.filter(equipo => equipo.fechaRegistro < fechaLimite);
+    }
+
+
+    
     public obtenerEquiposDisponiblesEstudiantes(): Cl_mEquipos[] {
         return this._equipos.filter(equipo => equipo.Activo());
     }
@@ -35,6 +47,7 @@ export default class Cl_mLaboratorio {
     const inactivos = this.contarEquiposInactivos(listaEquipos);
     return Math.round((inactivos / total) * 100);
     }   
+
     public equiposParaEstudiantes(): Cl_mEquipos[] {
         return this._equipos.filter(equipo => equipo.estado === 'Activo');
     }
@@ -73,10 +86,10 @@ export default class Cl_mLaboratorio {
         laboratorio: labMenosMaquinas === "Ninguno" ? "--" : labMenosMaquinas,
         cantidad: minMaquinas === Infinity ? 0 : minMaquinas
     };
-  }
+    }
   //////////////////////////////////////////////////////
 
-  public obtenerPorcentajeActivosPorLaboratorio(idLaboratorio: string, listaAProcesar?: Cl_mEquipos[]): { laboratorio: string, porcentaje: number } {
+    public obtenerPorcentajeActivosPorLaboratorio(idLaboratorio: string, listaAProcesar?: Cl_mEquipos[]): { laboratorio: string, porcentaje: number } {
     const equiposAAnalizar = listaAProcesar ? listaAProcesar : this._equipos;
 
     // Filtramos para quedarnos únicamente con los equipos del laboratorio seleccionado

@@ -7,9 +7,23 @@ export default class Cl_mEquipos {
     private _puesto: string;
     private _estado: 'Activo' | 'Reportado' | 'Mantenimiento';
     private _observacion: string;
+    private _fechaRegistro: Date = new Date();
     private _id?: string | undefined;
 
-    constructor(marca: string, procesador: string, memoria: number, ubicacion: string, meson: string,puesto: string, estado: 'Activo' | 'Reportado' | 'Mantenimiento', observacion: string, id?: string) {
+
+    constructor(
+        marca: string, 
+        procesador: string, 
+        memoria: number, 
+        ubicacion: string, 
+        meson: string,
+        puesto: string, 
+        estado: 'Activo' | 'Reportado' | 'Mantenimiento', 
+        observacion: string, 
+        fechaRegistro: Date = new Date(), 
+        id?: string,
+        
+        ) {
         this._marca = marca;
         this._procesador = procesador;
         this._memoria = memoria;
@@ -18,13 +32,13 @@ export default class Cl_mEquipos {
         this._puesto = puesto;
         this._estado = estado;
         this._observacion = observacion;
+        this._fechaRegistro = fechaRegistro;
         this._id = id || undefined; 
     }
 
     public set id(id: string) {
         this._id = id;
     }
-
 
     public set marca(marca: string) {
         this._marca = marca;
@@ -38,7 +52,6 @@ export default class Cl_mEquipos {
         this._memoria = memoria;
     }
 
-
     public set ubicacion(ubicacion: string) {
         this._ubicacion = ubicacion;
     }
@@ -48,14 +61,21 @@ export default class Cl_mEquipos {
             this._observacion = "";
         this._estado = estado;
     }
+
     public set meson(meson: string){
         this._meson = meson;
     }
+
     public set puesto(puesto: string){
         this._puesto = puesto;
     }
+
     public set observacion(observacion: string){
         this._observacion = observacion;
+    }
+    
+    public set fechaRegistro(fechaRegistro: Date){
+        this._fechaRegistro = fechaRegistro;
     }
 
     public get id(): string | undefined {
@@ -86,6 +106,9 @@ export default class Cl_mEquipos {
     }
     public get observacion(): string {
         return this._observacion;
+    }
+    public get fechaRegistro(): Date {
+        return this._fechaRegistro; 
     }
 
     public Mantenimiento() {
@@ -119,7 +142,8 @@ export default class Cl_mEquipos {
             meson: this._meson,
             puesto: this._puesto,
             estado: this._estado,
-            observacion: this._observacion
+            observacion: this._observacion,
+            fechaRegistro: this._fechaRegistro
         };
         }
 

@@ -8,4 +8,5 @@ export interface iEquipo{
     puesto: string;
     estado: 'Activo' | 'Reportado' | 'Mantenimiento';
     observacion: string;
+    fechaRegistro: Date;
 }
